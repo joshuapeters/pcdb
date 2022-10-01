@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   private
 
   def find_user_and_redirect
-    @user = User.find_by(username: params[:username])
+    @user = User.by_username(params[:username])
 
     login_is_valid = !@user.nil? && @user.authenticate(params[:password])
 
