@@ -39,3 +39,6 @@ Gemfile.lock
 
 # Ignore jetbrains ide files
 /.idea/
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
