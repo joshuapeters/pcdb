@@ -1,0 +1,21 @@
+/* reset */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p,
+a, form, label, article, aside, canvas, figure, footer, input,
+header, nav, section, ul, ol, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+.app{
+  height:100%;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100vw;
+  box-sizing: border-box;
+}
