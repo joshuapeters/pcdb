@@ -1,22 +1,36 @@
 class SessionsController < ApplicationController
+  def login
+    if logged_in?
+      redirect_to catalogs_path
+    end
+  end
   def create
-    redirect_to catalogs_path if logged_in?
-    find_user_and_redirect
+    if logged_in?
+      redirect_to catalogs_path and return
+    end
+
+    if find_user_and_login
+      redirect_to catalogs_path
+    else
+      redirect_to login_path, notice: "User could not be logged in. Please check username/password and try again!"
+    end
+  end
+
+  def destroy
+    session[:user_id] = nil
   end
 
   private
 
-  def find_user_and_redirect
-    @user = User.by_username(params[:username])
+  def find_user_and_login
+    @user = User.find_by(username: params[:username])
 
     login_is_valid = !@user.nil? && @user.authenticate(params[:password])
 
-    unless login_is_valid
-      redirect_to login_path
-      return
+    if login_is_valid
+      session[:user_id] = @user.id
     end
 
-    session[:user_id] = @user.id
-    redirect_to catalogs_path
+    login_is_valid
   end
 end
